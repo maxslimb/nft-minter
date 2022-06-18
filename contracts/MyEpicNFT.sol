@@ -53,6 +53,9 @@ function pickRandomFirstWord(uint256 tokenId) public view returns (string memory
       return uint256(keccak256(abi.encodePacked(input)));
   }
 
+function getTotalNFTsMintedSoFar() public view returns (uint256) {
+        return _tokenIds.current();
+    }
 
   // A function our user will hit to get their NFT.
   function makeAnEpicNFT() public {
