@@ -27,6 +27,7 @@ string baseSvg = "<svg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='x
   string[] secondWords = ["Panipuri", "palak", "paneer", "sandwich", "burger", "cupcake","lime","maggie","coldice","pizza","donuts","muffin","high","pasta","pancakes","Pie","banana","bagel","Cheetos","Kiwi"];
   string[] thirdWords = ["jurrasic", "ghostbusters", "kgf", "gold", "silver", "bronze","kingkong","sonic","housefull","dhamal","dhol","prithviraj","smarat","shivaji","jodha","padmavat","akbar","Coolie","shandaar","adam","Avatar"];
 
+  event NewEpicNFTMinted(address sender, uint256 tokenId);
 
 function pickRandomFirstWord(uint256 tokenId) public view returns (string memory) {
     // I seed the random generator. More on this in the lesson. 
@@ -61,7 +62,7 @@ function pickRandomFirstWord(uint256 tokenId) public view returns (string memory
     string memory first = pickRandomFirstWord(newItemId);
     string memory second = pickRandomSecondWord(newItemId);
     string memory third = pickRandomThirdWord(newItemId);
-
+    
     string memory combinedWord = string(abi.encodePacked(first, second, third));
 
     string memory finalSvg = string(abi.encodePacked(baseSvg, combinedWord, "</text></svg>"));
@@ -108,5 +109,7 @@ function pickRandomFirstWord(uint256 tokenId) public view returns (string memory
     console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
     // Increment the counter for when the next NFT is minted.
     _tokenIds.increment();
+
+    emit NewEpicNFTMinted(msg.sender, newItemId);
   }
 }
